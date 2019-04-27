@@ -1,20 +1,37 @@
 {
   "name": "project_2",
   "version": "1.0.0",
-  "description": "",
+  "description": "Project 2",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
+
+  "dependencies": {
+    "express": "^4.16.4",
+    "method-override": "^3.0.0",
+    "mongoose": "^5.5.2",
+    "hbs": "^4.0.4"
+  },
+  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/McBek25/PROJECT2.git"
   },
-  "author": "bek mcdevitt",
+  "author": "Bek McDevitt",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/McBek25/PROJECT2/issues"
   },
-  "homepage": "https://github.com/McBek25/PROJECT2#readme"
+  "homepage": "https://github.com/McBek25/PROJECT2#readme",
+"buildpacks": [
+  {
+    "url": "https://github.com/heroku/heroku-buildpack-pgbouncer"
+  },
+
+{
+  "url": "heroku/nodejs"
+}
+]
 }
