@@ -1,6 +1,4 @@
-console.log("Hello");
-
-const /*apivarname*/ = require(/*filepath*/)
+const userApi = require('./api/userApi.js');
 
 //boiler code
 const express = require('express');
@@ -14,6 +12,26 @@ app.use(express.urlencoded());
 //instructs express use handlebars to render page
 
 app.set('view engine', 'hbs');
+
+//route handler
+
+//all users
+app.get('/users', (req, res) => {
+    userApi.getAllUsers()
+        .then(users => {
+            res.render("users/users", { listOUsers: users });
+        });
+});
+
+//single user
+app.get('/users/:userId', (req, res) => {
+    userApi.getUserById(req.params.userId)
+        .then(user => {
+            res.render("users/users", { user });
+        });
+});
+
+//add app.post to create
 
 
 
