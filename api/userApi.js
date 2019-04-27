@@ -12,7 +12,24 @@ let UserCollection = mongoose.model("User", UserSchema);
 
 here*/
 
+//use mongoose's api to get all user documents and returns promis with all user documents
+function get AllUsers() {
+    return UserCollection.find();
+}
+
+function createNewUser(newUserData) {
+    return UserCollection.create(newUserData);
+}
+
+function getUserById(userId) {
+    return UserCollection.findById(userId);
+}
+
 module.exports = {
     //function names, comma on all but last
+    getAllUsers,
+    createNewUser,
+    getUserById
+
 };
 
