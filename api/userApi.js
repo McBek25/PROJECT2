@@ -17,35 +17,49 @@ const UserSchema = mongoose.Schema({
 });
 
 //create API communicate with "users" collection in mongodb
-//let UserCollection = mongoose.model("User", UserSchema);
-
-//need to change all users feature to all allergies for full crud?  bc single user does not need access to all users
-
-//generates all allergy options for user to select
-let AllergyCollection = mongoose.model('Allergy', allergySchema);
-
-function getAllAllergies() {
-    return AllergyCollection.find();
-}
-
-
-//use mongoose's api to get all user documents and returns promis with all user documents
+// (i think this goes in model files) let UserCollection = mongoose.model("User", UserSchema);
+//take out bc single user does not need access to all users
+//use mongoose's api to get all user documents and returns promise with all user documents
 /*function getAllUsers() {
     return UserCollection.find();
 }*/
 
-function createNewUser(newUserData) {
-    return UserCollection.create(newUserData);
+const UserCollection = require('../model/User.js');
+
+
+//CREATE new user
+function createNewUser(newUser) {
+    return UserCollection.create(newUser);
+}
+//above is also POST which will be used in router (if you have one) or controller files (or maybe server?)
+
+//update function and name from atm example
+/* function getUserById(userId) {
+    return UserCollection.findById(userId);
+} */
+//READ single user
+function singleUser(userId) {
+    return UserCollection.get(userId);
 }
 
-function getUserById(userId) {
-    return UserCollection.findById(userId);
+//UPDATE/REPLACE single user (like name or username)
+function updateUser(userId) {
+    return UserCollection.put(userId);
 }
+
+
+//DELETE user account
+function deleteUser(userId) {
+    return UserCollection.delete(userId);
+}
+
+
+
 
 module.exports = {
-    getAllUsers,
     createNewUser,
-    getUserById
-
+    singleUser,
+    updateUser,
+    deleteUser,
 };
 
