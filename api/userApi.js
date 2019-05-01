@@ -23,7 +23,8 @@ const UserSchema = mongoose.Schema({
 
 //generates all allergy options for user to select
 let AllergyCollection = mongoose.model('Allergy', allergySchema);
-getAllAllergies() {
+
+function getAllAllergies() {
     return AllergyCollection.find();
 }
 
