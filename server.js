@@ -1,4 +1,12 @@
-const userApi = require('./api/userApi.js');
+
+
+/* server file does this:
+grab dependencies
+configure application
+set routes
+star server */
+
+
 
 //boiler code
 const express = require('express');

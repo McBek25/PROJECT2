@@ -11,7 +11,7 @@ let UserCollection = mongoose.model("User", UserSchema);
 
 
 //use mongoose's api to get all user documents and returns promis with all user documents
-function get AllUsers() {
+function getAllUsers() {
     return UserCollection.find();
 }
 
