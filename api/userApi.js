@@ -3,11 +3,17 @@ const mongoose = require('../DB/connection.js');
 const allergy = require('./allergyApi.js');
 const recipe = require('./recipeApi.js');
 
+const ObjectId = mongoose.Schema.Types.ObjectId;
+
 
 
 //defines shape of entities 
+//named customer account on ERD
 const UserSchema = mongoose.Schema({
-    name: String //commas on all but last, believe is correct syntax
+    name: String, 
+    username: String,
+    status: Boolean,
+    allergyId: {type: ObjectId, ref: 'allergySchema'},
 });
 
 //create API communicate with "users" collection in mongodb
