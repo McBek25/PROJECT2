@@ -42,6 +42,11 @@ function singleUser(userId) {
     return UserCollection.get(userId);
 }
 
+//READ all users (for owner only and designated in controller)
+function allUsers(){
+    return UserCollection.find()
+}
+
 //UPDATE/REPLACE single user (like name or username)
 function updateUser(userId) {
     return UserCollection.put(userId);
