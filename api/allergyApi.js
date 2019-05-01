@@ -11,3 +11,14 @@ const allergySchema = mongoose.Schema({
     recipesId: {type: ObjectId, ref: 'recipesSchema'},
 });
 
+
+
+
+
+//generates all allergy options for user to select
+let AllergyCollection = mongoose.model('Allergy', allergySchema);
+
+function getAllAllergies() {
+    return AllergyCollection.find();
+}
+
