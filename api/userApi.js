@@ -46,6 +46,7 @@ function singleUser(userId) {
 function updateUser(userId) {
     return UserCollection.put(userId);
 }
+//why not patch?^
 
 
 //DELETE user account

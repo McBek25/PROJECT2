@@ -24,7 +24,7 @@ function getAllAllergies() {
 }*/
 
 
-//CREATE new allergy (this will be owner only)
+//CREATE new allergy (this will be owner only and designated in controller)
 function createNewAllergy(newAllergy) {
     return AllergyCollection.create(newAllergy);
 }
