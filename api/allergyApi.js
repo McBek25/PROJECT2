@@ -12,13 +12,42 @@ const allergySchema = mongoose.Schema({
 });
 
 
+const AllergyCollection = require('../model/Allergy.js');
 
 
 
-//generates all allergy options for user to select
+/*//generates all allergy options for user to select
 let AllergyCollection = mongoose.model('Allergy', allergySchema);
 
 function getAllAllergies() {
     return AllergyCollection.find();
+}*/
+
+
+//CREATE new allergy (this will be owner only)
+function createNewAllergy(newAllergy) {
+    return AllergyCollection.create(newAllergy);
 }
 
+//READ allergies
+function listAllergies(allAllergy) {
+    return AllergyCollection.get(newAllergy);
+}
+
+//UPDATE allergy
+function updateAllergy(allergyId) {
+    return AllergyCollection.put(allergyId);
+}
+//patching vs putting in a list of selected allergies
+
+//DELETE allergy
+function deleteAllergy(allergyId) {
+    return AllergyCollection.delete(allergyId);
+}
+
+module.exports = {
+    createNewAllergy,
+    listAllergies,
+    updateAllergy,
+    deleteAllergy,
+};
