@@ -1,4 +1,9 @@
-const mongoose = require('./connection.js');
+const mongoose = require('../DB/connection.js');
+
+const allergy = require('./allergyApi.js');
+const recipe = require('./recipeApi.js');
+
+
 
 //defines shape of entities 
 const UserSchema = mongoose.Schema({
