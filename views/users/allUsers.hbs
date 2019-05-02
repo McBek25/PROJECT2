@@ -3,3 +3,10 @@
 {{#each users}}
 <a href="/users/{{_id}}">{{username}}</a>
 {{/each}}
+
+
+<form action="/users" method=POST>
+<input type="text" name="username" placeholder="Username">
+<input type="text" name="name" placeholder="Name">
+<input type="submit" value="Register">
+</form>

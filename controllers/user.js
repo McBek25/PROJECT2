@@ -19,11 +19,13 @@ router.get("/:userId", (req, res) => {
 
 router.post("/", (req, res) => {
     userApi.createNewUser(req.body)
-        .then(user => res.send(user))
+        .then(user => res.render('users/singleUser', {user}))
 })
 
 router.delete("/:userId", (req, res) => {
-    userApi.deleteUser(req.params.userId).then(() => res.send())
+    userApi.deleteUser(req.params.userId)
+    .then(() => userApi.allUsers())
+    .then(users => res.render('users/allUsers', {users}))
 })
 
 router.patch("/:userId", (req, res) => {

@@ -29,8 +29,7 @@ const UserCollection = mongoose.model('User', UserSchema);
 
 //CREATE new user
 function createNewUser(newUser) {
-    return UserCollection.create(newUser)
-    .populate("allergy");
+    return UserCollection.create(newUser);
 }
 //above is also POST which will be used in router (if you have one) or controller files (or maybe server?)
 
