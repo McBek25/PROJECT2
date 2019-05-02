@@ -27,15 +27,13 @@ function getAllAllergies() {
 //CREATE new allergy (this will be owner only and designated in controller)
 function createNewAllergy(newAllergy) {
     return AllergyCollection.create(newAllergy)
-        .populate('recipes');
 }
 
 
 
 //READ allergies
 function listAllergies() {
-    return AllergyCollection.find()
-        .populate('recipes');
+    return AllergyCollection.find();
 
 }
 
@@ -57,7 +55,8 @@ function deleteAllergy(allergyId) {
 }
 
 function findAllergyByName(allergyName) {
-    return AllergyCollection.findOne({name: allergyName})
+    return AllergyCollection.findOne({ name: allergyName })
+        .populate('recipes')
 }
 
 

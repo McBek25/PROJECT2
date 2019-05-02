@@ -11,8 +11,8 @@ const RecipeSchema = mongoose.Schema({
     containsAllergen: Boolean,
     Return: Boolean,
     Title: String,
-    ingredients: [String],
-    instructions: [String],
+    ingredients: String,
+    instructions: String,
 });
 
 
