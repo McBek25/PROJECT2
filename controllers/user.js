@@ -8,16 +8,18 @@ let router = express.Router()
 
 
 router.get("/", (req, res) => {
-    userApi.allUsers().then(users => res.render('users/allUsers', {users}))
+    userApi.allUsers().then(users => res.render('users/allUsers', { users }))
 })
 
 router.get("/:userId", (req, res) => {
-    userApi.singleUser(req.params.userId).then(user => res.send(user))
+    userApi.singleUser(req.params.userId).then(user => {
+        res.render('users/singleUser', { user })
+    })
 })
 
 router.post("/", (req, res) => {
     userApi.createNewUser(req.body)
-    .then(user => res.send(user))
+        .then(user => res.send(user))
 })
 
 router.delete("/:userId", (req, res) => {
@@ -25,9 +27,22 @@ router.delete("/:userId", (req, res) => {
 })
 
 router.patch("/:userId", (req, res) => {
-
     userApi.updateUser(req.params.userId, req.body)
         .then(user => res.send(user))
+})
+
+router.post("/:userId/recipes", (req, res) => {
+    allergyApi.findAllergyByName(req.body.allergy)
+        .then(allergy => {
+            if (allergy == null) {
+                console.log("No allergy found")
+                recipeApi.listRecipes().then(recipes => res.render('users/searchResult', {recipes}))
+            } else {
+                console.log("User has an allergy")
+                userApi.updateUser(req.params.userId, { allergy: allergy._id })
+                res.render('users/searchResult', {recipes: allergy.recipes})
+            }
+        })
 })
 
 

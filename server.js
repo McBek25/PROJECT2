@@ -18,7 +18,7 @@ const methodOverride = require('method-override')
 //boiler code
 //instructs express parse HTML form request properly
 app.use(express.json())
-app.use(express.urlencoded());
+app.use(express.urlencoded({urlencoded: true}));
 
 //boiler code when using handlebars
 //instructs express use handlebars to render page

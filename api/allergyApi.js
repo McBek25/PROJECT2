@@ -56,6 +56,10 @@ function deleteAllergy(allergyId) {
     return AllergyCollection.findByIdAndDelete(allergyId);
 }
 
+function findAllergyByName(allergyName) {
+    return AllergyCollection.findOne({name: allergyName})
+}
+
 
 
 module.exports = {
@@ -63,4 +67,5 @@ module.exports = {
     listAllergies,
     updateAllergy,
     deleteAllergy,
+    findAllergyByName
 };
