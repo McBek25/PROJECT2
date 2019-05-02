@@ -19,10 +19,6 @@
   },
   "author": "Bek McDevitt",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/McBek25/PROJECT2/issues"
-  },
-  "homepage": "https://github.com/McBek25/PROJECT2#readme",
   "buildpacks": [
     {
       "url": "https://github.com/heroku/heroku-buildpack-pgbouncer"
