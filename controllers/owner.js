@@ -18,11 +18,18 @@ router.patch("/allergies/:id", (req, res) => {
 
 router.delete("/allergies/:id", (req, res) => {
     allergyApi.deleteAllergy(req.params.id)
-        .then(() => res.send())
+    .then(() => recipeApi.listRecipes()
+    .then(recipes => allergyApi.listAllergies()
+            .then(allergies => userApi.allUsers()
+                .then(users => res.render('owner', { allergies, users, recipes })))))
 })
 
 router.post("/allergies", (req, res) => {
-    allergyApi.createNewAllergy(req.body).then(allergy => res.send(allergy))
+    allergyApi.createNewAllergy(req.body)
+    .then(() => recipeApi.listRecipes()
+    .then(recipes => allergyApi.listAllergies()
+            .then(allergies => userApi.allUsers()
+                .then(users => res.render('owner', { allergies, users, recipes })))))
 })
 
 
@@ -30,21 +37,39 @@ router.get("/recipes", (req, res) => {
     recipeApi.listRecipes().then(recipes => res.send(recipes))
 })
 
-router.post("/recipes", (req, res) => {
+router.post("/recipes", (req, res) =>
     recipeApi.createNewRecipe(req.body)
-        .then(recipe => res.send(recipe))
-})
+    .then(() => recipeApi.listRecipes()
+    .then(recipes => allergyApi.listAllergies()
+            .then(allergies => userApi.allUsers()
+                .then(users => {
+                    console.log(allergies)
+                    console.log(users)
+                    console.log(recipes)
+                    res.render('owner', { allergies, users, recipes })
+                }))))
+)
 
 router.patch("/recipes/:id", (req, res) => {
     recipeApi.updateRecipe(req.params.id, req.body)
-        .then(recipe => res.send(recipe))
+    .then(() => recipeApi.listRecipes()
+    .then(recipes => allergyApi.listAllergies()
+        .then(allergies => userApi.allUsers()
+            .then(users => res.render('owner', { allergies, users, recipes })))))
 })
 
 router.delete("/recipes/:id", (req, res) => {
     recipeApi.deleteRecipe(req.params.id)
-        .then(() => res.send())
+        .then(() => recipeApi.listRecipes()
+        .then(recipes => allergyApi.listAllergies()
+            .then(allergies => userApi.allUsers()
+                .then(users => res.render('owner', { allergies, users, recipes })))))
 })
 
 
+router.get('/', (req, res) => recipeApi.listRecipes()
+    .then(recipes => allergyApi.listAllergies()
+        .then(allergies => userApi.allUsers()
+            .then(users => res.render('owner', { allergies, users, recipes })))))
 
 module.exports = router

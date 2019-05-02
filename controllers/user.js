@@ -40,9 +40,9 @@ router.post("/:userId/recipes", (req, res) => {
                 console.log("No allergy found")
                 recipeApi.listRecipes().then(recipes => res.render('users/searchResult', {recipes}))
             } else {
-                console.log("User has an allergy")
+                console.log("User has an allergy", allergy)
                 userApi.updateUser(req.params.userId, { allergy: allergy._id })
-                res.render('users/searchResult', {recipes: allergy.recipes})
+                .then(() => res.render('users/searchResult', {recipes: allergy.recipes})                )
             }
         })
 })
