@@ -1,0 +1,43 @@
+<h2>Owner page</h2>
+{{#each recipes}}
+<p>{{_id}}</p>
+<form action="/owner/recipes/{{_id}}?_method=PATCH" method="POST">
+    <input type="text" name="Title" value="{{Title}}">
+    <textarea name="ingredients">{{ingredients}}</textarea>
+    <textarea name="instructions">{{instructions}}</textarea>
+    <input type="submit" value="Update">
+</form>
+
+<form action="/owner/recipes/{{_id}}?_method=DELETE" method="POST">
+    <input type="submit" value="DELETE">
+</form>
+{{/each}}
+
+<form action="/owner/recipes" method="POST">
+    <input type="text" name="Title" placeholder="Title">
+    <textarea name="ingredients">Ingredients</textarea>
+    <textarea name="instructions">Instructions</textarea>
+    <input type="submit" value="Create">
+</form>
+
+
+<h2>Allergies</h2>
+{{#each allergies}}
+<p>Name: {{name}}</p>
+{{#each recipes}}
+<p>Recipe Id: {{_id}}</p>
+{{/each}}
+<form action="/owner/allergies/{{_id}}?_method=DELETE" method="POST">
+<button>DELETE Allergy</button>
+</form>
+{{/each}}
+
+<h3>Create New Allergy</h3>
+<form action="/owner/allergies" method="POST">
+    <input type="text" name="name" placeholder="Name">
+
+    <input type="text" name="recipes[]" placeholder="Recipe Id">
+    <input type="text" name="recipes[]" placeholder="Recipe Id">
+   
+    <input type="submit" value="Create">
+</form>
