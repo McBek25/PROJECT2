@@ -1,0 +1,22 @@
+<h1>Here are some recipes!</h1>
+{{#each recipes}}
+<h1>{{Title}}</h1>
+
+
+<h2>Ingredients</h2>
+<ul>
+    {{#each ingredients}}
+    <li>{{this}}</li>
+    {{/each}}
+</ul>
+
+<h2>Instructions</h2>
+<ol>
+    {{#each instructions}}
+
+    <li>{{this}}</li>
+    {{/each}}
+</ol>
+
+
+{{/each}}
