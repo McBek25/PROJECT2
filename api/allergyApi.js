@@ -6,14 +6,14 @@ const recipe = require('./recipeApi.js');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 //defines shape of entities
-const allergySchema = mongoose.Schema({
+const AllergySchema = mongoose.Schema({
     name: String,
-    recipesId: [{type: ObjectId, ref: 'recipesSchema'}],
+    recipes: [{ type: ObjectId, ref: 'Recipe' }],
 });
 
 
-const AllergyCollection = require('../model/Allergy.js');
-
+//const AllergyCollection = require('../model/Allergy.js');
+const AllergyCollection = mongoose.model('Allergy', AllergySchema);
 
 
 /*//generates all allergy options for user to select
@@ -26,24 +26,37 @@ function getAllAllergies() {
 
 //CREATE new allergy (this will be owner only and designated in controller)
 function createNewAllergy(newAllergy) {
-    return AllergyCollection.create(newAllergy);
+    return AllergyCollection.create(newAllergy)
+        .populate('recipes');
 }
+
+
 
 //READ allergies
-function listAllergies(allAllergy) {
-    return AllergyCollection.get(newAllergy);
+function listAllergies() {
+    return AllergyCollection.find()
+        .populate('recipes');
+
 }
 
+
+
+
 //UPDATE allergy
-function updateAllergy(allergyId) {
-    return AllergyCollection.put(allergyId);
+function updateAllergy(allergyId, allergy) {
+    return AllergyCollection.findByIdAndUpdate(allergyId, allergy)
+        .then(() => AllergyCollection.findById(allergyId)
+            .populate('recipes'));
 }
+
 //patching vs putting in a list of selected allergies
 
 //DELETE allergy
 function deleteAllergy(allergyId) {
-    return AllergyCollection.delete(allergyId);
+    return AllergyCollection.findByIdAndDelete(allergyId);
 }
+
+
 
 module.exports = {
     createNewAllergy,

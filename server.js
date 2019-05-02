@@ -11,7 +11,9 @@ star server */
 //boiler code
 const express = require('express');
 const app = express();
-const userController = require('./controllers/user')
+const userController = require('./controllers/user');
+const ownerController = require('./controllers/owner');
+const methodOverride = require('method-override')
 
 //boiler code
 //instructs express parse HTML form request properly
@@ -23,9 +25,14 @@ app.use(express.urlencoded());
 
 app.set('view engine', 'hbs');
 
+app.use(methodOverride('_method'))
+app.use(express.static(__dirname + '/public'))
+
 //route handler
 
-app.use('/users', userController)
+app.use('/users', userController);
+
+app.use('/owner', ownerController)
 
 //all users
 // app.get('/users', (req, res) => {

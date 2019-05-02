@@ -8,7 +8,7 @@ let router = express.Router()
 
 
 router.get("/", (req, res) => {
-    userApi.allUsers().then(users => res.send(users))
+    userApi.allUsers().then(users => res.render('users/allUsers', {users}))
 })
 
 router.get("/:userId", (req, res) => {

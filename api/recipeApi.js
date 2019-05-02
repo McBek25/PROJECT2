@@ -6,7 +6,7 @@ const recipe = require('./recipeApi.js');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 //defines shape of entities
-const recipesSchema = mongoose.Schema({
+const RecipeSchema = mongoose.Schema({
     isRecipe: Boolean,
     containsAllergen: Boolean,
     Return: Boolean,
@@ -16,7 +16,7 @@ const recipesSchema = mongoose.Schema({
 });
 
 
-const RecipeCollection = require('../model/Recipe.js');
+const RecipeCollection = mongoose.model('Recipe', RecipeSchema);
 
 
 //CREATE new recipe (this will be owner only and designated in controller file)
@@ -25,19 +25,20 @@ function createNewRecipe(newRecipe) {
 }
 
 //READ recipes
-function listRecipes(allRecipe) {
-    return RecipeCollection.get(newRecipe);
+function listRecipes() {
+    return RecipeCollection.find();
 }
 
 //UPDATE recipe (owner only, designated in controller file)
-function updateRecipe(recipeId) {
-    return RecipeCollection.put(recipeId);
+function updateRecipe(recipeId, recipe) {
+    return RecipeCollection.findByIdAndUpdate(recipeId, recipe)
+        .then(() => RecipeCollection.findById(recipeId))
 }
 //patching vs putting in a list of selected recipes
 
 //DELETE recipe (owner only, designated on controller file)
 function deleteRecipe(recipeId) {
-    return RecipeCollection.delete(recipeId);
+    return RecipeCollection.findByIdAndDelete(recipeId);
 }
 
 module.exports = {
