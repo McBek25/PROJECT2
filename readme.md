@@ -1,7 +1,7 @@
 
 Link to Trello: https://trello.com/b/lbUqZBNG/project-2
 
-Link to Heroku: https://dashboard.heroku.com/apps/intense-retreat-15676
+Link to Heroku: https://intense-retreat-15676.herokuapp.com/users
 
 
 <img src="final_erd.jpg" alt="final erd">
