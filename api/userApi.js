@@ -13,7 +13,7 @@ const UserSchema = mongoose.Schema({
     name: String, 
     username: String,
     status: Boolean,
-    allergyId: {type: ObjectId, ref: 'allergySchema'},
+    allergy: {type: ObjectId, ref: 'allergySchema'},
 });
 
 //create API communicate with "users" collection in mongodb
@@ -24,7 +24,7 @@ const UserSchema = mongoose.Schema({
     return UserCollection.find();
 }*/
 
-const UserCollection = require('../model/User.js');
+const UserCollection = mongoose.model('User', UserSchema);
 
 
 //CREATE new user
@@ -39,7 +39,7 @@ function createNewUser(newUser) {
 } */
 //READ single user
 function singleUser(userId) {
-    return UserCollection.get(userId);
+    return UserCollection.findById(userId);
 }
 
 //READ all users (for owner only and designated in controller)
@@ -48,15 +48,16 @@ function allUsers(){
 }
 
 //UPDATE/REPLACE single user (like name or username)
-function updateUser(userId) {
-    return UserCollection.put(userId);
+function updateUser(userId, user) {
+    return UserCollection.findByIdAndUpdate(userId, user)
+        .then(() => UserCollection.findById(userId))
 }
 //why not patch?^
 
 
 //DELETE user account
 function deleteUser(userId) {
-    return UserCollection.delete(userId);
+    return UserCollection.findByIdAndDelete(userId);
 }
 
 
@@ -65,6 +66,7 @@ function deleteUser(userId) {
 module.exports = {
     createNewUser,
     singleUser,
+    allUsers,
     updateUser,
     deleteUser,
 };

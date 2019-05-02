@@ -8,7 +8,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 //defines shape of entities
 const allergySchema = mongoose.Schema({
     name: String,
-    recipesId: {type: ObjectId, ref: 'recipesSchema'},
+    recipesId: [{type: ObjectId, ref: 'recipesSchema'}],
 });
 
 

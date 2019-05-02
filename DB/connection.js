@@ -1,7 +1,7 @@
 /* handles connection to mongodb and sets name of database to be used*/ 
 const mongoose = require('mongoose');
 
-const connectionString = "mongodb://localhost/"; //find out how to select file extension and where came from on example code
+const connectionString = "mongodb://localhost/project-2"; //find out how to select file extension and where came from on example code
 
 /* this happened automatically- find out what it is before deleting 
 import { connection } from "mongoose"; */
